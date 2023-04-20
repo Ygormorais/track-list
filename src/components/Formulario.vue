@@ -2,25 +2,11 @@
     <div class="box">
         <div class="columns">
             <div class="column is-8" role="form" aria-label="Formulario para criação de uma tarefa">
-                <input type="text" class="input" placeholder="Qual tarefe você deseja iniciar">
+                <input type="text" class="input" placeholder="Qual tarefe você deseja iniciar" v-model="descricao" />
+
             </div>
             <div class="column">
-                <div class="is-flex is-align-items-center is-justify-content-space-between">
-
-                    <Cronometro :tempoEmSegundo ="tempoEmSegundo" />
-                    <button class="button" @click="iniciar">
-                        <span class="icon">
-                            <i class="fas fa-play"></i>
-                        </span>
-                        <span>play</span>
-                    </button>
-                    <button class="button" @click="finalizar">
-                        <span class="icon">
-                            <i class="fas fa-stop"></i>
-                        </span>
-                        <span>stop</span>
-                    </button>
-                </div>
+                <Temporizador @aoTemporizadorFinalizado="finalizarTarefa" />
 
             </div>
         </div>
@@ -29,34 +15,23 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import Cronometro from './Cronometro.vue'
+import Temporizador from './Temporizador.vue'
 
 export default defineComponent({
     name: "Formulário",
     components: {
-        Cronometro
-
+        Temporizador
     },
     data() {
         return {
-            tempoEmSegundo: 0,
-            cronometro: 0
+            descricao: ''
         }
     },
-
     methods: {
-        iniciar() {
-            // começar a contagem
-            //1s = a 1000ms
-            this.cronometro = setInterval(() => {
-                this.tempoEmSegundo += 1
-            }, 1000)
-
-
-        },
-        finalizar() {
-            clearInterval(this.cronometro)
-
+        finalizarTarefa(tempoDecorrido: number): void {
+            console.log('tempo da tarefa', tempoDecorrido)
+            console.log('descrição da tarefa', this.descricao)
+            this.descricao = ''
         }
     }
 });
