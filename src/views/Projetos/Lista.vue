@@ -5,7 +5,7 @@
         <i class="fas fa-plus"></i>
       </span>
       <span>Novo projeto</span>
-    </router-link>
+    </router-link> 
     <table class="table is-fullwidth">
       <thead>
         <tr>
@@ -45,11 +45,11 @@ import { EXCLUIR_PROJETO } from '@/store/tipo-mutacoes'
 export default defineComponent({
   name: "Lista",
   methods: {
-    excluir(id: string) {
+    excluir (id: string) {
       this.store.commit(EXCLUIR_PROJETO, id)
     }
   },
-  setup() {
+  setup () {
     const store = useStore()
     return {
       projetos: computed(() => store.state.projetos),
